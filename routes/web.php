@@ -25,3 +25,5 @@ Route::get('/reminders','PagesController@getReminders');
 Route::get('/reports','PagesController@getReports');
 Route::get('/invoice','PagesController@getInvoice');
 Route::get('/login','PagesController@getLogin');
+
+Route::resource('users','UsersController');

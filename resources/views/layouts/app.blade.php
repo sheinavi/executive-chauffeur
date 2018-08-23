@@ -10,30 +10,19 @@
 
     <title>{{config('app.name','Executive Chauffeur')}}</title>
 </head>
-<body id="page-top">
+<body>
+
+    @include('inc.navbar')
 
 
-<body id="page-top">
-
- @include('inc.navbar')
-
-<div id="wrapper">
-
-    @include('inc.leftpanel')
-
-    <div id="content-wrapper">
         <div class="container-fluid">
             @yield('content')
         </div>
         <!-- /.container-fluid -->
 
-        @include('inc.footer')
+    @include('inc.footer')
 
-    </div>
-    <!-- /.content-wrapper -->
 
-</div>
-<!-- /#wrapper -->
 
 
 
