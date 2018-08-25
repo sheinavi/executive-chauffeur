@@ -15,8 +15,11 @@
     @include('inc.navbar')
 
 
-        <div class="container-fluid">
-            @yield('content')
+        <div class="container">
+            @include('inc.notifications')
+           <div class="row" id="wrap">
+               @yield('content')
+           </div>
         </div>
         <!-- /.container-fluid -->
 

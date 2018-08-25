@@ -26,10 +26,6 @@ class PagesController extends Controller
         return view('pages.clients');
     }
 
-    public function getDrivers(){
-        return view('pages.drivers');
-    }
-
     public function getReminders(){
         return view('pages.reminders');
     }

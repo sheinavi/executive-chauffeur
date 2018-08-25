@@ -20,10 +20,11 @@ Route::get('/manage-bookings','PagesController@getManageBookings');
 Route::get('/confirmed-bookings','PagesController@getConfirmedBookings');
 Route::get('/completed-bookings','PagesController@getCompletedBookings');
 Route::get('/clients','PagesController@getClients');
-Route::get('/drivers','PagesController@getDrivers');
+/*Route::get('/drivers','PagesController@getDrivers');*/
 Route::get('/reminders','PagesController@getReminders');
 Route::get('/reports','PagesController@getReports');
 Route::get('/invoice','PagesController@getInvoice');
 Route::get('/login','PagesController@getLogin');
 
 Route::resource('users','UsersController');
+Route::resource('drivers','DriversController');

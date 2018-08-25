@@ -6,8 +6,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item {{Request::segment(1) == '' ? 'active':''}}">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item dropdown">
@@ -21,19 +21,19 @@
                     <a class="dropdown-item" href="/completed-bookings">Completed Bookings</a>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{Request::segment(1) == 'clients' ? 'active':''}}">
                 <a class="nav-link" href="/clients">Clients</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{Request::segment(1) == 'drivers' ? 'active':''}}">
                 <a class="nav-link" href="/drivers">Drivers</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{Request::segment(1) == 'reminders' ? 'active':''}} ">
                 <a class="nav-link" href="/reminders">Reminder Settings</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{Request::segment(1) == 'reports' ? 'active':''}}">
                 <a class="nav-link" href="/reports">Reports</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{Request::segment(1) == 'invoice' ? 'active':''}}">
                 <a class="nav-link" href="/invoice">Invoice</a>
             </li>
         </ul>
