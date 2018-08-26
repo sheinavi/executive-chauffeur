@@ -63,7 +63,8 @@ class DriversController extends Controller
      */
     public function show($id)
     {
-        //
+        $driver = Driver::find($id);
+        return view('drivers.show')->with('driver',$driver);
     }
 
     /**
@@ -74,7 +75,8 @@ class DriversController extends Controller
      */
     public function edit($id)
     {
-        //
+        $driver = Driver::find($id);
+        return view('drivers.edit')->with('driver',$driver);
     }
 
     /**
@@ -86,7 +88,22 @@ class DriversController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required'
+        ]);
+
+        $driver = Driver::find($id);
+        $driver->firstname = $request->input('firstname');
+        $driver->lastname = $request->input('lastname');
+        $driver->email = $request->input('email');
+        $driver->photo = 'Temp value';
+        $driver->phone = $request->input('phone');
+        $driver->save();
+
+        return redirect('/drivers')->with('success', $driver->firstname.' '.$driver->lastname.'\'s details updated.');
+
     }
 
     /**
