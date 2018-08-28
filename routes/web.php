@@ -28,3 +28,6 @@ Route::get('/login','PagesController@getLogin');
 
 Route::resource('users','UsersController');
 Route::resource('drivers','DriversController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

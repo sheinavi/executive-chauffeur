@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Driver;
 use DB;
 
@@ -13,6 +14,16 @@ class DriversController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $drivers = Driver::orderBy('lastname','asc')->paginate(10);
@@ -40,14 +51,33 @@ class DriversController extends Controller
         $this->validate($request,[
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'phone' => 'required',
+            'photo' => 'image|nullable|max:1999'
         ]);
+
+        //handle file upload
+        if($request->hasFile('photo')){
+            //Get filename with extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+
+            $extension = $request->file('photo')->getClientOriginalExtension();
+
+            //filenametostore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+            $path = $request->file('photo')->storeAs('public/img/drivers',$fileNameToStore);
+
+        }else{
+            $fileNameToStore = 'no-photo.png';
+        }
 
         $driver = new Driver();
         $driver->firstname = $request->input('firstname');
         $driver->lastname = $request->input('lastname');
         $driver->email = $request->input('email');
-        $driver->photo = 'Temp value';
+        $driver->photo = $fileNameToStore;
         $driver->phone = $request->input('phone');
         $driver->save();
 
@@ -91,18 +121,37 @@ class DriversController extends Controller
         $this->validate($request,[
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'phone' => 'required',
+            'photo' => 'image|nullable|max:1999'
         ]);
+
+
 
         $driver = Driver::find($id);
         $driver->firstname = $request->input('firstname');
         $driver->lastname = $request->input('lastname');
         $driver->email = $request->input('email');
-        $driver->photo = 'Temp value';
         $driver->phone = $request->input('phone');
+
+        //handle file upload
+        if($request->hasFile('photo')){
+            //Get filename with extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+
+            $extension = $request->file('photo')->getClientOriginalExtension();
+
+            //filenametostore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+            $path = $request->file('photo')->storeAs('public/img/drivers',$fileNameToStore);
+            $driver->photo = $fileNameToStore;
+        }
+
         $driver->save();
 
-        return redirect('/drivers')->with('success', $driver->firstname.' '.$driver->lastname.'\'s details updated.');
+        return redirect('/drivers/'.$id.'/edit')->with('success', $driver->firstname.' '.$driver->lastname.'\'s details updated.');
 
     }
 
@@ -114,6 +163,13 @@ class DriversController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $driver = Driver::find($id);
+
+        if($driver->photo != 'no-photo.png'){
+            Storage::delete('public/img/drivers/'.$driver->photo);
+        }
+
+        $driver->delete();
+        return redirect('/drivers')->with('success', 'driver deleted');
     }
 }

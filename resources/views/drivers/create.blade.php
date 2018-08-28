@@ -5,7 +5,7 @@
     <h1>Add new Driver</h1>
     <hr>
 
-    {!! Form::open(['action' => 'DriversController@store','method'=>'POST']) !!}
+    {!! Form::open(['action' => 'DriversController@store','method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
 
             <div class="form-group row">
@@ -35,12 +35,14 @@
             </div>
         </div>
 
-       <div class="form-group row">
+        <div class="form-group row">
             {{Form::label('title','Upload Photo',['class'=>'col-md-3 col-form-label'])}}
            <div class="col-md-8">
-            {{Form::open(['url' => 'img/drivers', 'files' => true])}}
+            {{Form::file('photo')}}
            </div>
         </div>
+
+
 
         <div class="form-group">
             {{Form::submit('Save',['class'=>'btn btn-success pull-right btn-lg'])}}
