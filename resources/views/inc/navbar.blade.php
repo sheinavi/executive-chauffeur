@@ -20,10 +20,11 @@
                         Bookings
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/manage-bookings">Bookings Management</a>
+                        <a class="dropdown-item" href="/bookings">Bookings Management</a>
                         <a class="dropdown-item" href="/confirmed-bookings">Confirmed Bookings</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/completed-bookings">Completed Bookings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/bookings/create">New Booking</a>
                     </div>
                 </li>
                 <li class="nav-item {{Request::segment(1) == 'clients' ? 'active':''}}">

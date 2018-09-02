@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payments extends Model
+class POI extends Model
 {
-    public function booking()
-    {
+    public $table = "airport_poi";
+
+    public function booking(){
         return $this->belongsTo('App\Booking');
     }
 }

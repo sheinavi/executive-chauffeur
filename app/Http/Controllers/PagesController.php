@@ -32,9 +32,9 @@ class PagesController extends Controller
         return view('pages.completedBookings');
     }
 
-    public function getClients(){
+    /*public function getClients(){
         return view('pages.clients');
-    }
+    }*/
 
     public function getReminders(){
         return view('pages.reminders');

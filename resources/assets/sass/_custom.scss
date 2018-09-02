@@ -20,6 +20,8 @@ footer{
   color:#fff;
   width: 100%;
   padding: 20px;
+  bottom:0;
+  position:fixed;
 }
 
 img.small-img{
@@ -29,4 +31,8 @@ img.small-img{
 
 .inline_form{
   display:inline;
+}
+
+.strong-text{
+  font-weight: 900;
 }
