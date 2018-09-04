@@ -49,6 +49,9 @@ class BookingsController extends Controller
     public function index()
     {
         //$bookings = Booking::orderBy('pickup_datetime','desc')->paginate(10);
+        //$bookings2 = Booking::with("ClientDetail")->get();
+        //return response()->json(['bookings' => $bookings2]);
+       
         $bookings = DB::table('bookings')
             ->join('clients','bookings.client_id','=','bookings.client_id')
             ->select('bookings.booking_id','bookings.journey_from','bookings.journey_to','bookings.pickup_datetime','bookings.status','clients.firstname','clients.lastname')

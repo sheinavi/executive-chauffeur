@@ -45,4 +45,9 @@ class Booking extends Model
     {
         return $this->belongsToMany('App\Driver');
     }
+
+    public function ClientDetail()
+    {
+        return $this->hasOne( Client::class, 'client_id' , 'client_id'  );
+    }
 }
